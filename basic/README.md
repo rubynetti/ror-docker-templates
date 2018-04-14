@@ -1,8 +1,8 @@
-## Base Example
+## Basic Example
 Basic Compose configuration for dockerizing a basic Ruby on Rails/SQLite app.
 I assume using a debian-based image in the Dockerfile commands.
-* [Dockerfile](/base/Dockerfile)
-* [docker-compose.yml](/base/docker-compose.yml)
+* [Dockerfile](/basic/Dockerfile)
+* [docker-compose.yml](/basic/docker-compose.yml)
 
 ### Dockerfile
 Choose ruby version from the _[docker images](https://hub.docker.com/_/ruby/)_
