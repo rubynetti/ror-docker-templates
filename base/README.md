@@ -1,6 +1,8 @@
 ## Base Example
-Basic Compose configuration for dockerizing a basic Ruby on Rails app.
+Basic Compose configuration for dockerizing a basic Ruby on Rails/SQLite app.
 I assume using a debian-based image in the Dockerfile commands.
+* [Dockerfile](/base/Dockerfile)
+* [docker-compose.yml](/base/docker-compose.yml)
 
 ### Dockerfile
 Choose ruby version from the _[docker images](https://hub.docker.com/_/ruby/)_
@@ -21,8 +23,7 @@ Set the app directory as the working directory
 WORKDIR /app
 ```
 Add rails user and give it ownership of the app directory\
-The user has a home directory, the default 1000 uid and belongs to a group with the same name.
-```-u 1000``` 
+The user has a home directory, the default 1000 UID and belongs to a group with the same name
 ```Dockerfile
 RUN useradd -u 1000 -Um rails && \
     chown -R rails:rails /app
@@ -33,3 +34,34 @@ USER rails
 ```
 
 ### docker-compose.yml
+Choose compose version
+```YAML
+version: '3'
+```
+Declare a volume for the gem bundle
+```YAML
+volumes:
+  bundle_cache:
+```
+
+Configure the web service
+```YAML
+services:
+  web:
+    # build the app image from the working dir
+    build: .
+    # start the server on 0.0.0.0
+    command: rails s -b '0'
+    # send the right signal to the rails server when stopping the container
+    stop_signal: SIGINT
+    volumes:
+      # bind the working dir on the host machine to the one in the container
+      - .:/app
+      # use the volume for storing the bundle
+      - bundle_cache:/usr/local/bundle
+    # expose rails server to the host machine
+    ports:
+      - "3000:3000"
+    # try restarting the service on failure
+    restart: on-failure
+```
