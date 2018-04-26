@@ -14,11 +14,7 @@ Install Node.js
 RUN apt-get update -qq && \
     apt-get install -y build-essential nodejs
 ```
-Create app directory
-```Dockerfile
-RUN mkdir /app
-```
-Set the app directory as the working directory
+Create the app working directory
 ```Dockerfile
 WORKDIR /app
 ```
