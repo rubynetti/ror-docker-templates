@@ -3,7 +3,7 @@ version: '3'
 services:
   web:
     build: .
-    command: rails s -b '0'
+    command: rails s -b '0.0.0.0'
     stop_signal: SIGINT
     volumes:
       - .:/app
