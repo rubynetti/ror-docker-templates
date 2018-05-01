@@ -37,7 +37,7 @@ version: '3'
 Declare a volume for the gem bundle
 ```YAML
 volumes:
-  bundle_cache:
+  app_bundle:
 ```
 
 Configure the web service
@@ -47,14 +47,14 @@ services:
     # build the app image from the working dir
     build: .
     # start the server on 0.0.0.0
-    command: rails s -b '0'
+    command: rails s -b 0.0.0.0
     # send the right signal to the rails server when stopping the container
     stop_signal: SIGINT
     volumes:
       # bind the working dir on the host machine to the one in the container
       - .:/app
       # use the volume for storing the bundle
-      - bundle_cache:/usr/local/bundle
+      - app_bundle:/usr/local/bundle
     # expose rails server to the host machine
     ports:
       - "3000:3000"

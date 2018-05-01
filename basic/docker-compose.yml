@@ -7,10 +7,10 @@ services:
     stop_signal: SIGINT
     volumes:
       - .:/app
-      - bundle_cache:/usr/local/bundle
+      - app_bundle:/usr/local/bundle
     ports:
       - "3000:3000"
     restart: on-failure
 
 volumes:
-  bundle_cache:
+  app_bundle:
