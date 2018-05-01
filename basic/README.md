@@ -57,7 +57,7 @@ services:
       - app_bundle:/usr/local/bundle
     # expose rails server to the host machine
     ports:
-      - "3000:3000"
+      - 3000:3000
     # try restarting the service on failure
     restart: on-failure
 ```
