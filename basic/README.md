@@ -34,7 +34,7 @@ Choose compose version
 ```YAML
 version: '3'
 ```
-Declare a volume for the gem bundle
+Set a volume for the gem bundle
 ```YAML
 volumes:
   app_bundle:
@@ -44,10 +44,10 @@ Configure the web service
 ```YAML
 services:
   web:
-    # build the app image from the working dir
+    # build the app image from the Dockerfile in the working dir
     build: .
-    # start the server on 0.0.0.0
-    command: rails s -b 0.0.0.0
+    # start the server binding to all interfaces
+    command: rails s -b 0.0.0.0 -p 3000
     # send the right signal to the rails server when stopping the container
     stop_signal: SIGINT
     volumes:
