@@ -1,0 +1,17 @@
+version: '3.2'
+
+services:
+  web:
+    build:
+      context: .
+      cache_from:
+        - $REGISTRY_WEB
+    image: $REGISTRY_WEB
+    ports:
+      - "3000:3000"
+    restart: always
+    volumes:
+      - db:/app/db/sqlite
+
+volumes:
+  db:
